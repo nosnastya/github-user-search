@@ -19,14 +19,14 @@
 }
 
 .cardButton {
+    display: block;
     border-radius: 4px;
-    background: linear-gradient(to right, #67b26b, #4ca2cb) !important;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
     border: none;
     color: #FFFFFF;
     text-align: center;
     font-size: 14px;
     padding: 6px 12px;
-    width: 200px;
     transition: all 0.4s;
     cursor: pointer;
     margin: 15px 5px 5px;
@@ -38,6 +38,7 @@
     position: relative;
     transition: 0.4s;
 }
+
 .cardButton span:after {
     content: '\00bb';
     position: absolute;
@@ -46,10 +47,21 @@
     right: -20px;
     transition: 0.5s;
 }
+
 .cardButton:hover span {
     padding-right: 25px;
 }
+
 .cardButton:hover span:after {
     opacity: 1;
     right: 0;
 }
+
+.tag {
+    display: inline-block;
+    padding: 6px 12px;
+    white-space: nowrap;
+    background-color: #f1f8ff;
+    border-radius: 3px;
+}
+

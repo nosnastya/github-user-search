@@ -1,35 +1,41 @@
 import { typedAction } from "../helpers";
 import { Dispatch, AnyAction } from "redux";
 import { RootState } from "..";
+import { Constants } from "../../enums/shared";
 
-const initialState: RepositoryState = { isLoading: false, repositories: [] };
+const initialState: RepositoryState = { isLoading: false, isResolved: false, repositories: [] };
 
 const setRepositories = (repositories: Repository[]) => {
-    return typedAction("repositories/SET_REPOSITORIES", repositories);
-};
-
-export const selectRepository = (repository: Repository) => {
-    return typedAction("repositories/SELECT_REPOSITORY", { repository });
+    return typedAction(Constants.SET_REPOSITORIES, repositories);
 };
 
 export const requestRepositories = () => {
-    return typedAction("repositories/REQUEST_REPOSITORIES");
+    return typedAction(Constants.REQUEST_REPOSITORIES);
+};
+
+export const setRepositoriesResolved = (bool: boolean) => {
+    return typedAction(Constants.SET_REPOSITORIES_RESOLVED, bool);
 };
 
 export const loadRepositories = (repositoriesSearchQuery: string) => {
     return (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
         dispatch(requestRepositories());
-        setTimeout(() => {
-            return fetch(`https://api.github.com/search/repositories?q=${repositoriesSearchQuery}`)
+        return fetch(`https://api.github.com/search/repositories?q=${repositoriesSearchQuery}`)
             .then(res => res.json())
             .then(json => dispatch(setRepositories([...json.items])))
-        }, 1000);
+            .then(() => dispatch(setRepositoriesResolved(true)))
+    }
+};
+
+export const resetRepositoryResolved = () => {
+    return (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+        dispatch(setRepositoriesResolved(false));
     }
 };
 
 type RepositoryAction = ReturnType<typeof setRepositories
-| typeof selectRepository
 | typeof requestRepositories
+| typeof setRepositoriesResolved
 >;
 
 export function repositoriesReducer(
@@ -37,19 +43,23 @@ export function repositoriesReducer(
     action: RepositoryAction
   ): RepositoryState {
     switch (action.type) {
-        case "repositories/REQUEST_REPOSITORIES":
+        case Constants.REQUEST_REPOSITORIES:
             return {
                 ...state,
                 isLoading: true,
+                isResolved: false,
             };
-        case "repositories/SET_REPOSITORIES":
+        case Constants.SET_REPOSITORIES:
             return {
                 ...state,
                 isLoading: false,
                 repositories: action.payload
             };
-        case "repositories/SELECT_REPOSITORY":
-            return { ...state, ...action.payload.repository}
+        case Constants.SET_REPOSITORIES_RESOLVED:
+            return {
+                ...state,
+                isResolved: action.payload
+            };
         default:
             return state;
     }

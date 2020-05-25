@@ -20,11 +20,18 @@ type Repository = {
 type UserState = {
     users: User[];
     isLoading: boolean;
+    isResolved: boolean;
 };
 
 type RepositoryState = {
     repositories: Repository[];
     isLoading: boolean;
+    isResolved: boolean;
 };
 
 type EntityValue = Entities.User | Entities.User;
+
+type Option<T extends EntityValue> = {
+    label: string;
+    value: T;
+};

@@ -1,13 +1,14 @@
-import { Entities } from "../../enums/Entities"
+import { Entities } from "../../enums/shared"
 import { typedAction } from "../helpers";
 import { Dispatch, AnyAction } from "redux";
 import { RootState } from "..";
+import { Constants } from "../../enums/shared";
 
 type EntityType = Entities.User | Entities.Repository;
 const initialState: EntityType = Entities.User;
 
 const selectEntity = (selectedEntity: EntityType) => {
-    return typedAction("entities/SELECT_ENTITY", selectedEntity);
+    return typedAction(Constants.SET_ENTITY, selectedEntity);
 };
 
 export const setEntity = (entity: EntityType) => {
@@ -23,7 +24,7 @@ export function entitiesReducer(
     action: EntityAction
   ): EntityType {
     switch (action.type) {
-        case "entities/SELECT_ENTITY":
+        case Constants.SET_ENTITY:
             return action.payload;
         default:
             return state;

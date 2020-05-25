@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Select.module.scss"
 
-type Option<T extends EntityValue> = {
-    label: string;
-    value: T;
-};
-
 export interface OptionComponentProps<T = any> {
     className?: string;
     options: Option<T>[];

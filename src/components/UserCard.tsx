@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Card.module.scss";
-import { goTo } from "../helpers/goTo"
 
 type Props = {
     user: User;
@@ -19,12 +18,12 @@ export const UserCard: React.FC<Props> = ({ user }) => {
                 />
                 <h2 className={styles.cardName}>{user.login}</h2>
             </div>
-            <button
+            <a
                 className={styles.cardButton}
-                onClick={() => goTo(user.html_url)}
+                href={user.html_url}
             >
                 <span>Go to profile</span>
-            </button>
+            </a>
         </div>
     );
 };

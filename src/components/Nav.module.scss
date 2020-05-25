@@ -1,12 +1,20 @@
+@import "../styles/variables.scss";
+
 .searchInput {
-    padding: 6px 12px;
+    padding: 10px 20px;
     border-radius: 4px;
     border: 1px solid #ddd;
     font-size: 14px;
+    @media (min-width: $screen-md) {
+        width: 300px;
+    }
 }
 
 .headerSearchWrapper {
-    padding-top: 130px;
+    @media (min-width: $screen-md) {
+        width: 770px;
+        margin: auto;
+    }
 }
 
 .centeredSearchWrapper {
@@ -18,11 +26,12 @@
 }
 
 .search {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    transform: translate(0, 0);
-    transition: all 0.3s ease-in-out;
+    position: relative;
+    left: auto;
+    top: 0;
+    padding: 10px;
+    transition: top 0.2s ease-in;
+    padding: 15px 10px;
 }
 
 .centeredSearchWrapper .search {

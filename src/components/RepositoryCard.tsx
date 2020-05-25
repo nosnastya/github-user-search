@@ -27,7 +27,7 @@ export const RepositoryCard: React.FC<Props> = ({ repository }) => {
                     </span>
                 }
                 {repository.language &&
-                    <span className="tag mar-lft--5">{repository.language}</span>
+                    <span className={`${styles.tag} mar-lft--5`}>{repository.language}</span>
                 }
             </div>
         </div>
