@@ -1,12 +1,13 @@
 import React from "react";
-import { Header } from "./components/header/Header";
+import { Nav } from "./components/Nav";
 import { Switch, Route } from "react-router-dom";
-import { UsersList } from "./components/main/UsersList";
+import { UsersList } from "./components/UsersList";
+import "./App.scss";
 
 const App = () => {
   return (
-    <div>
-      <Header />
+    <div className="main-wrapper">
+      <Nav />
       <Switch>
         <Route path="/" exact component={UsersList} />
       </Switch>
