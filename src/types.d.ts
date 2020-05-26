@@ -1,3 +1,5 @@
+type EntityType = Entities.User | Entities.Repository;
+
 type User = {
     id: number;
     login: string;
@@ -17,16 +19,17 @@ type Repository = {
     type: Entities.Repository
 };
 
-type UserState = {
-    users: User[];
-    isLoading: boolean;
-    isResolved: boolean;
-};
+// type UserState = {
+//     users: User[];
+//     isLoading: boolean;
+//     isResolved: boolean;
+// };
 
-type RepositoryState = {
-    repositories: Repository[];
+type EntityState = {
+    results: Repository[] | User[];
     isLoading: boolean;
     isResolved: boolean;
+    type: EntityType;
 };
 
 type EntityValue = Entities.User | Entities.User;

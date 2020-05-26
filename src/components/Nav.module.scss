@@ -21,6 +21,7 @@
     height: 100vh;
     width: 100%;
     display: flex;
+    justify-content: center;
     position: relative;
     background: #fff;
 }
@@ -28,15 +29,14 @@
 .search {
     position: relative;
     left: auto;
-    top: 0;
-    padding: 10px;
-    transition: top 0.2s ease-in;
+    top: auto;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in, top 0.3s ease-in;
     padding: 15px 10px;
 }
 
 .centeredSearchWrapper .search {
     position: absolute;
-    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-100%);
 }

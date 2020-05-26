@@ -1,30 +1,26 @@
 
 import React, { useState } from "react";
 import { RootState } from "../redux";
-import { loadUsers, resetUserResolved } from "../redux/modules/users";
-import { loadRepositories, resetRepositoryResolved } from "../redux/modules/repositories"
+import { selectEntityType, loadEntities, resetEntities, resetEntitiesResolved } from "../redux/modules/entities"
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { Select } from "../common-ui/Select";
 import { Entities } from "../enums/shared";
-import { setEntity } from "../redux/modules/entities";
 import styles from "./Nav.module.scss";
 import * as _ from "lodash";
 
 const mapStateToProps = (state: RootState) => ({
-    users: state.users.users,
-    selectedEntity: state.selectedEntity,
-    isLoading: (state.users.isLoading || state.repositories.isLoading)
+    selectedEntityType: state.entities.type,
+    isLoading: state.entities.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(
         {
-            loadUsers,
-            loadRepositories,
-            setEntity,
-            resetUserResolved,
-            resetRepositoryResolved
+            loadEntities,
+            resetEntitiesResolved,
+            resetEntities,
+            selectEntityType
         },
         dispatch
     );
@@ -42,20 +38,22 @@ const searchOptions = [
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
-export const UnconnectedNav: React.FC<Props> = ({ loadUsers, loadRepositories, setEntity, selectedEntity, resetUserResolved, resetRepositoryResolved }) => {
+export const UnconnectedNav: React.FC<Props> = ({
+    loadEntities,
+    resetEntitiesResolved,
+    resetEntities,
+    selectedEntityType,
+    selectEntityType
+}) => {
     const [searchQuery, setSearchQuery] = useState("");
 
-    const loadList = (searchQuery: string) => {
+    const loadResults = ({ searchQuery, entityType = selectedEntityType}: {searchQuery: string, entityType?: EntityType })  => {
         if (searchQuery.length >= 3) {
-            if (selectedEntity === Entities.User) {
-                loadUsers(searchQuery);
-            } else {
-                loadRepositories(searchQuery);
-            }
+            loadEntities(searchQuery, entityType);
         }
     };
 
-    const debouncedOnChange = _.debounce((searchString) => loadList(searchString), 1000);
+    const debouncedOnChange = _.debounce((searchQuery) => loadResults({searchQuery: searchQuery}), 1000);
 
     const onChange = (event: React.SyntheticEvent) => {
         const
@@ -63,15 +61,19 @@ export const UnconnectedNav: React.FC<Props> = ({ loadUsers, loadRepositories, s
             searchString = target.value;
 
         event.persist();
+
+        if (!searchString) {
+            resetEntities()
+        }
+
         setSearchQuery(searchString);
         debouncedOnChange(searchString);
     };
 
-    const handleSelectChange = (value: Entities) => {
-        setEntity(value);
-        loadList(searchQuery);
-        resetUserResolved();
-        resetRepositoryResolved();
+    const handleSelectChange = (entityType: Entities) => {
+        selectEntityType(entityType);
+        resetEntitiesResolved();
+        loadResults({ searchQuery: searchQuery, entityType: entityType });
     };
 
     return (
@@ -97,8 +99,8 @@ export const UnconnectedNav: React.FC<Props> = ({ loadUsers, loadRepositories, s
                     <Select
                         className="mar-lft--10"
                         options={searchOptions}
-                        defaultValue={selectedEntity}
-                        onChange={(value) => handleSelectChange(value)}
+                        defaultValue={selectedEntityType}
+                        onChange={(entityType) => handleSelectChange(entityType)}
                     />
                 </div>
             </div>
