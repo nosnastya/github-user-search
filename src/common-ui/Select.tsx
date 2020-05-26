@@ -9,29 +9,33 @@ export interface OptionComponentProps<T = any> {
 }
 
 export function Select<T extends EntityValue>({ defaultValue, options, onChange, className}: OptionComponentProps<T>) {
-    const [optionValue, setOtionValue] = useState(defaultValue);
+    const [optionValue, setOptionValue] = useState(defaultValue);
 
     const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
         const { selectedIndex } = e.currentTarget;
         const selectedOption = options[selectedIndex];
-        setOtionValue(selectedOption.value);
+        setOptionValue(selectedOption.value);
         onChange(selectedOption.value);
     }
 
     return (
-        <select
-            value={optionValue}
-            onChange={handleOnChange}
-            className={`${styles.select} ${className}`}
-        >
-            {options.map((option, id) =>
-                <option
-                    key={id}
-                    value={option.value}
-                >
-                    {option.label}
-                </option>
-            )}
-        </select>
+        <div className="pos-rel disp-flex">
+            <select
+                value={optionValue}
+                onChange={handleOnChange}
+                className={`${styles.select} ${className}`}
+            >
+                {options.map((option, id) =>
+                    <option
+                        key={id}
+                        value={option.value}
+                    >
+                        {option.label}
+                    </option>
+                )}
+            </select>
+            <span className={styles.selectToggle}></span>
+        </div>
+
     );
 }

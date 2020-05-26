@@ -19,17 +19,13 @@ type Repository = {
     type: Entities.Repository
 };
 
-// type UserState = {
-//     users: User[];
-//     isLoading: boolean;
-//     isResolved: boolean;
-// };
 
 type EntityState = {
     results: Repository[] | User[];
     isLoading: boolean;
     isResolved: boolean;
     type: EntityType;
+    searchQueue: string;
 };
 
 type EntityValue = Entities.User | Entities.User;

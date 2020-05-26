@@ -1,7 +1,7 @@
 
-import React, { useState } from "react";
-import { RootState } from "../redux";
-import { selectEntityType, loadEntities, resetEntities, resetEntitiesResolved } from "../redux/modules/entities"
+import React, { useState, useEffect } from "react";
+import { RootState } from "../redux/reducers";
+import { selectEntityType, loadEntities, resetEntities, resetEntitiesResolved, changeSearchQueue } from "../redux/actions/entities"
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { Select } from "../common-ui/Select";
@@ -11,7 +11,8 @@ import * as _ from "lodash";
 
 const mapStateToProps = (state: RootState) => ({
     selectedEntityType: state.entities.type,
-    isLoading: state.entities.isLoading
+    isLoading: state.entities.isLoading,
+    searchQueue: state.entities.searchQueue
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
             loadEntities,
             resetEntitiesResolved,
             resetEntities,
-            selectEntityType
+            selectEntityType,
+            changeSearchQueue
         },
         dispatch
     );
@@ -43,15 +45,23 @@ export const UnconnectedNav: React.FC<Props> = ({
     resetEntitiesResolved,
     resetEntities,
     selectedEntityType,
-    selectEntityType
+    selectEntityType,
+    changeSearchQueue,
+    searchQueue
 }) => {
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState(searchQueue);
+    const [isSearchTop, setIsSearchTop] = useState(false);
 
     const loadResults = ({ searchQuery, entityType = selectedEntityType}: {searchQuery: string, entityType?: EntityType })  => {
-        if (searchQuery.length >= 3) {
-            loadEntities(searchQuery, entityType);
-        }
+        setIsSearchTop(true)
+        loadEntities(searchQuery, entityType);
     };
+
+    useEffect(() => {
+        if (searchQuery.length >= 3) {
+            loadResults({ searchQuery: searchQuery, entityType: selectedEntityType });
+        }
+    },[]);
 
     const debouncedOnChange = _.debounce((searchQuery) => loadResults({searchQuery: searchQuery}), 1000);
 
@@ -64,20 +74,25 @@ export const UnconnectedNav: React.FC<Props> = ({
 
         if (!searchString) {
             resetEntities()
+            setIsSearchTop(false)
         }
-
+        changeSearchQueue(searchString); // needed for persisting data on page reload
         setSearchQuery(searchString);
-        debouncedOnChange(searchString);
+        if (searchString.length >= 3) {
+            debouncedOnChange(searchString);
+        }
     };
 
     const handleSelectChange = (entityType: Entities) => {
         selectEntityType(entityType);
         resetEntitiesResolved();
-        loadResults({ searchQuery: searchQuery, entityType: entityType });
+        if (searchQuery.length >= 3) {
+            loadResults({ searchQuery: searchQuery, entityType: entityType });
+        }
     };
 
     return (
-        <div className={searchQuery.length >= 3 ? styles.headerSearchWrapper : styles.centeredSearchWrapper}>
+        <div className={isSearchTop ? styles.headerSearchWrapper : styles.centeredSearchWrapper}>
             <div className={styles.search}>
                 <div className="disp-flex flex-align--center mar-ver--20">
                     <svg height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">

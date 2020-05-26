@@ -30,8 +30,7 @@
     position: relative;
     left: auto;
     top: auto;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in, top 0.3s ease-in;
+    transition: all 0.3s ease-in;
     padding: 15px 10px;
 }
 
@@ -40,3 +39,4 @@
     top: 50%;
     transform: translateY(-100%);
 }
+

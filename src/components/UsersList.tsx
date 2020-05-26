@@ -1,5 +1,5 @@
 import React from "react";
-import { RootState } from "../redux";
+import { RootState } from "../redux/reducers";
 import { connect } from "react-redux";
 import { UserCard } from "./UserCard";
 import { RepositoryCard } from "./RepositoryCard";
@@ -14,7 +14,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 type Props = ReturnType<typeof mapStateToProps>;
-
+type Result = User & Repository;
 const UnconnectedUsersList: React.FC<Props> = ({
     results,
     isLoading,
@@ -26,11 +26,11 @@ const UnconnectedUsersList: React.FC<Props> = ({
             { !isLoading && isResolved &&
                 <div className={styles.cardsWrapper}>
                     {results.length
-                        ? results.map((result: User & Repository, id:number) => (
+                        ? results.map((result: Result, id:number) =>
                             selectedEntity === Entities.User
                             ? <UserCard key={`${result.id}-${id}`} user={result} />
                             : <RepositoryCard key={`${result.id}-${id}`} repository={result} />
-                        ))
+                        )
                         : <p className="mar-ver--20 mar-lft--10">No {selectedEntity === Entities.User ? 'users' : 'repositories'} match your search</p>
                     }
                 </div>

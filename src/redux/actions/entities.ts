@@ -1,13 +1,10 @@
 import { Entities } from "../../enums/shared"
-import { typedAction } from "../helpers";
+import { typedAction } from "../helpers/typedAction";
 import { Dispatch, AnyAction } from "redux";
-import { RootState } from "..";
+import { RootState } from "../reducers/index";
 import { Constants } from "../../enums/shared";
 
-const initialState: EntityState = { isLoading: false, isResolved: false, results: [], type: Entities.User };
-
 const setEntityType = (selectedEntityType: EntityType) => {
-    debugger
     return typedAction(Constants.SET_ENTITY_TYPE, selectedEntityType);
 };
 
@@ -23,9 +20,20 @@ const setEntitiesResolved = (isResolved: boolean) => {
     return typedAction(Constants.SET_ENTITIES_RESOLVED, isResolved);
 };
 
+const setSearchQueue = (searchQueue: string) => {
+    return typedAction(Constants.SET_SEARCH_QUEUE, searchQueue);
+};
+
 export const selectEntityType = (entityType: EntityType) => {
     return (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
         dispatch(setEntityType(entityType));
+    }
+};
+
+// needed for persisting query to local storage
+export const changeSearchQueue = (searchQueue: string) => {
+    return (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+        dispatch(setSearchQueue(searchQueue));
     }
 };
 
@@ -36,6 +44,7 @@ export const loadEntities = (searchQuery: string, entityType: EntityType) => {
             .then(res => res.json())
             .then(json => dispatch(setEntities([...json.items])))
             .then(() => dispatch(setEntitiesResolved(true)))
+            .catch(err => alert(err.message))
     }
 };
 
@@ -52,41 +61,10 @@ export const resetEntities = () => {
     }
 };
 
-type EntityAction =
+export type EntityActionType =
 ReturnType<typeof setEntityType
 | typeof setEntities
 | typeof requestEntities
 | typeof setEntitiesResolved
+| typeof setSearchQueue
 >;
-
-export function entitiesReducer(
-    state = initialState,
-    action: EntityAction
-  ): EntityType {
-    switch (action.type) {
-        case Constants.SET_ENTITY_TYPE:
-            return {
-                ...state,
-                type: action.payload
-            };
-        case Constants.REQUEST_ENTITIES:
-            return {
-                ...state,
-                isLoading: true,
-                isResolved: false,
-            };
-        case Constants.SET_ENTITIES:
-            return {
-                ...state,
-                isLoading: false,
-                results: action.payload
-            };
-        case Constants.SET_ENTITIES_RESOLVED:
-            return {
-                ...state,
-                isResolved: action.payload
-            };
-        default:
-            return state;
-    }
-};
