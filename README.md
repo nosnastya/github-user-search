@@ -1,3 +1,13 @@
+<h1 align="center">Github User Search</h1>
+
+<div align="center">
+
+<img src='https://github.githubassets.com/images/modules/logos_page/Octocat.png' height='60' alt='Redux Logo' aria-label='redux.js.org' />
+
+![DEMO:](github-user-search-89oo89.netlify.app)
+
+</div>
+
 To see the app in action, clone it down and install the dependencies:
 
 git clone https://github.com/nosnastya/github-user-search.git
@@ -5,7 +15,6 @@ git clone https://github.com/nosnastya/github-user-search.git
 `yarn`
 
 Then, run the app
-
 `yarn start`
 
 Then, in your browser, open http://localhost:3000/ to view it! 🎉 🎉
