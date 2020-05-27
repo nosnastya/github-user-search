@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Card.module.scss";
-import { Entities } from "../enums/shared";
+import { Entities } from "../../enums/shared";
 
 type Props = {
     item: Repository & User;

@@ -1,7 +1,7 @@
 import React from "react";
-import { Nav } from "./components/Nav";
+import { Nav } from "./components/main/Nav";
 import { Switch, Route } from "react-router-dom";
-import { UsersList } from "./components/UsersList";
+import { UsersList } from "./components/main/UsersList";
 import "./styles/styles.scss";
 
 const App = () => {

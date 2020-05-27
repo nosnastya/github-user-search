@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from "react";
-import { RootState } from "../redux/reducers";
-import { selectEntityType, loadEntities, resetEntities, resetEntitiesResolved, changeSearchQueue } from "../redux/actions/entities"
+import { RootState } from "../../redux/reducers";
+import { selectEntityType, loadEntities, resetEntities, resetEntitiesResolved, changeSearchQueue } from "../../redux/actions/entities"
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { Select } from "../common-ui/Select";
-import { Entities } from "../enums/shared";
+import { Select } from "../ui/Select";
+import { Entities } from "../../enums/shared";
 import styles from "./Nav.module.scss";
 import * as _ from "lodash";
 

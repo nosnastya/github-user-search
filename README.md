@@ -1,44 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In order to run  the app in the development mode please use
 
-## Available Scripts
-
-In the project directory, you can run:
-
+### `yarn install`
 ### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This is a sample project created with:
+- React
+- Typescript
+- Redux
+- redux-thunk
+- redux-persist
+- lodash
 
-### `yarn test`
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Fow css I used node-sass package in order to create scss modules to encapsulate styles for a specific component. I also used global css classes with atomic approach for more generic styles.
 
-### `yarn build`
+It was my first experience working with this tech stack and I enjoyed it a lot, although for small project like next time that I would rather usr ReactHooks instead of Redux.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I used react persist and local storage to save your search queue and results, so if you reload the page you won't lose teh state.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Next steps I would do to make his project better:
+- Add pagination
+- Customize <Select> component to be more generic (for this small project it’s fine, but in a big project it should accept generic type arguments as a value, not only string)
+- Add UI component library and create generic components for button, input, typography components
+- Add tests
+- Add Webpack - for adding images and other assets

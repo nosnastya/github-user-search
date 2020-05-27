@@ -1,8 +1,8 @@
 import React from "react";
-import { RootState } from "../redux/reducers";
+import { RootState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { Card } from "./Card";
-import { Entities } from "../enums/shared"
+import { Card } from "../ui/Card";
+import { Entities } from "../../enums/shared"
 import styles from "./UsersList.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
