@@ -8,14 +8,20 @@ DEMO: [https://github-user-search-89oo89.netlify.app/](https://github-user-searc
 
 </div>
 
+
 To see the app in action, clone it down and install the dependencies:
 
-git clone https://github.com/nosnastya/github-user-search.git
+`git clone https://github.com/nosnastya/github-user-search.git`
+
 `cd github-user-search`
+
 `yarn`
 
 Then, run the app
+
 `yarn start`
+
+
 
 Then, in your browser, open http://localhost:3000/ to view it! 🎉 🎉
 
