@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/github-user-search/static/css/main.708a5f04.chunk.css",
+    "main.js": "/github-user-search/static/js/main.18a24fe2.chunk.js",
+    "main.js.map": "/github-user-search/static/js/main.18a24fe2.chunk.js.map",
+    "runtime-main.js": "/github-user-search/static/js/runtime-main.2e993643.js",
+    "runtime-main.js.map": "/github-user-search/static/js/runtime-main.2e993643.js.map",
+    "static/js/2.6a01f91b.chunk.js": "/github-user-search/static/js/2.6a01f91b.chunk.js",
+    "static/js/2.6a01f91b.chunk.js.map": "/github-user-search/static/js/2.6a01f91b.chunk.js.map",
+    "index.html": "/github-user-search/index.html",
+    "precache-manifest.ce13482b97e52a8f4a6036ffff8be6ab.js": "/github-user-search/precache-manifest.ce13482b97e52a8f4a6036ffff8be6ab.js",
+    "service-worker.js": "/github-user-search/service-worker.js",
+    "static/css/main.708a5f04.chunk.css.map": "/github-user-search/static/css/main.708a5f04.chunk.css.map",
+    "static/js/2.6a01f91b.chunk.js.LICENSE.txt": "/github-user-search/static/js/2.6a01f91b.chunk.js.LICENSE.txt",
+    "static/media/octocat-spinner-128.gif": "/github-user-search/static/media/octocat-spinner-128.77466063.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2e993643.js",
+    "static/js/2.6a01f91b.chunk.js",
+    "static/css/main.708a5f04.chunk.css",
+    "static/js/main.18a24fe2.chunk.js"
+  ]
+}
