@@ -1,7 +1,15 @@
+@import "../styles/variables.scss";
+
 .cardWrapper {
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba($color-dark-gray, 0.1), 0 2px 4px -1px rgba($color-dark-gray, 0.06);
+}
+
+.cardImgWrapper {
+    @media (max-width: $screen-md) {
+        flex-direction: column;
+    }
 }
 
 .cardImg {
@@ -11,6 +19,7 @@
     width: 50px;
     min-width: 50px;
     margin-right: 10px;
+    background-color: $color-light-gray;
 }
 
 .cardName {
@@ -22,9 +31,9 @@
 .cardButton {
     display: block;
     border-radius: 4px;
-    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    background: linear-gradient(to right, $color-green, $color-light-blue);
     border: none;
-    color: #FFFFFF;
+    color: $color-white;
     text-align: center;
     font-size: 14px;
     padding: 6px 12px;
@@ -41,10 +50,16 @@
 }
 
 .cardButton span:after {
-    content: '\00bb';
+    content: '';
     position: absolute;
+    border: solid $color-white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
     opacity: 0;
-    top: 0;
+    top: 4px;
     right: -20px;
     transition: 0.5s;
 }
@@ -58,11 +73,15 @@
     right: 0;
 }
 
+.cardInfo {
+    max-width: 160px;
+}
+
 .tag {
     display: inline-block;
     padding: 6px 12px;
     white-space: nowrap;
-    background-color: #f1f8ff;
+    background-color: $color-light-gray;
     border-radius: 3px;
 }
 

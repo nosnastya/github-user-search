@@ -8,7 +8,7 @@ export interface OptionComponentProps<T = any> {
     defaultValue: T;
 }
 
-export function Select<T extends EntityValue>({ defaultValue, options, onChange, className}: OptionComponentProps<T>) {
+export function Select<T extends EntityType>({ defaultValue, options, onChange, className}: OptionComponentProps<T>) {
     const [optionValue, setOptionValue] = useState(defaultValue);
 
     const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {

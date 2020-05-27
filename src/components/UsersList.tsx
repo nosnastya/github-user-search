@@ -1,8 +1,7 @@
 import React from "react";
 import { RootState } from "../redux/reducers";
 import { connect } from "react-redux";
-import { UserCard } from "./UserCard";
-import { RepositoryCard } from "./RepositoryCard";
+import { Card } from "./Card";
 import { Entities } from "../enums/shared"
 import styles from "./UsersList.module.scss";
 
@@ -27,9 +26,7 @@ const UnconnectedUsersList: React.FC<Props> = ({
                 <div className={styles.cardsWrapper}>
                     {results.length
                         ? results.map((result: Result, id:number) =>
-                            selectedEntity === Entities.User
-                            ? <UserCard key={`${result.id}-${id}`} user={result} />
-                            : <RepositoryCard key={`${result.id}-${id}`} repository={result} />
+                            <Card key={`${result.id}-${id}`} item={result} type={selectedEntity}/>
                         )
                         : <p className="mar-ver--20 mar-lft--10">No {selectedEntity === Entities.User ? 'users' : 'repositories'} match your search</p>
                     }

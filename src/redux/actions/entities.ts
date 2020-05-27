@@ -38,9 +38,9 @@ export const changeSearchQueue = (searchQueue: string) => {
 };
 
 export const loadEntities = (searchQuery: string, entityType: EntityType) => {
-    return (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+    return async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
         dispatch(requestEntities());
-        return fetch(`https://api.github.com/search/${entityType === Entities.User ? 'users' : 'repositories'}?q=${searchQuery}`)
+        return await fetch(`https://api.github.com/search/${entityType === Entities.User ? 'users' : 'repositories'}?q=${searchQuery}`)
             .then(res => res.json())
             .then(json => dispatch(setEntities([...json.items])))
             .then(() => dispatch(setEntitiesResolved(true)))

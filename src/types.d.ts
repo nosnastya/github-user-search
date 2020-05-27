@@ -28,9 +28,7 @@ type EntityState = {
     searchQueue: string;
 };
 
-type EntityValue = Entities.User | Entities.User;
-
-type Option<T extends EntityValue> = {
+type Option<T extends EntityType> = {
     label: string;
     value: T;
 };
